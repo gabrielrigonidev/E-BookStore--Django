@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block conteudo %}
+]
+<main class="d-flex justify-content-center">
+    <div class="main-page">
+        <h1 class="text-banner">EBook Store</h1>
+        <p class="text-p">Os apaixonados por leitura merecem amar esses livros!</p>
+        <a type="button" class="cadastro-button" href="{% url 'cadastrar_user' %}">Cadastre-se</a>
+    </div>
+    <div class="banner">
+        <img class="book-banner" src="{% static 'book.svg' %}" alt="">
+    </div>
+</main>
+
+{% endblock %}

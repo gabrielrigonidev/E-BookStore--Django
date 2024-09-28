@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block conteudo %}
+
+<section class="container col-6 mt-5">
+    <h1>Cadastrar Novo Livro: </h1>
+    <br>
+    <form action="{% url 'cadastrar_livro' %}" method="POST">
+        {% csrf_token %}
+        <label class="form-label" for="">Título do Livro:</label>
+        {{form.titulo}}
+        <label class="form-label"for="">Autor do Livro:</label>
+        {{form.autor}}
+        <label class="form-label "for="">Gênero do Livro:</label>
+        {{form.genero}}
+        <label class="form-label "for="">Quantidade de Páginas:</label>
+        {{form.paginas}}
+        <label class="form-label "for="">Preço do Livro:</label>
+        {{form.preco}}
+        <input class="btn btn-success mb-5" type="submit" value="Cadastrar">
+    </form>
+</section>
+
+{% endblock %}
