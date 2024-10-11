@@ -1,7 +1,9 @@
+from datetime import timedelta
 from django.contrib import messages
 from django.shortcuts import render, redirect
-from appBook.form_cadastro_user import FormCadastroUser
-from appBook.form_cadastro_livro import FormCadastroLivro
+from appBook.forms import FormCadastroLivro
+from appBook.forms import FormCadastroUser
+from appBook.forms import FormLogin
 from appBook.models import Usuario
 
 def appBook(request):
@@ -38,3 +40,36 @@ def cadastrar_livro(request):
         'form': novo_livro
     }
     return render(request, 'biblioteca.html', context)
+
+def form_login(request):
+    formLogin = FormLogin(request.POST or None)
+
+    if request.POST:
+        _email = request.POST['email']
+        _senha = request.POST['senha']
+        try:
+            usuario = Usuario.objects.get(email=_email, senha=_senha)
+            if usuario is not None:
+                request.session.set_expiry(timedelta(seconds=60))
+                request.session['email'] = _email
+
+                messages.success(request, "Logado com sucesso!")
+                return redirect('dashboard')
+        except:
+            messages.error(request, "Deu ruim parceiro")
+            return redirect('form_login')
+
+    context = {
+        'form': formLogin
+    }
+    return render (request, 'form-login.html', context)
+
+def dashboard(request):
+    #Recupera a variável de Sessão
+    email = request.session.get('email')
+
+    context = {
+            'username': email
+        }
+
+    return render(request, 'dashboard.html', context)

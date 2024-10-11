@@ -19,23 +19,22 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
+                <div class="collapse navbar-collapse navbar-fix" id="navbarNav">
                 <ul class="navbar-nav">
-                    <div class="navbar-fix">
+                    <div class="d-flex">
                         <li class="nav-item px-3">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                            <a class="nav-link active" aria-current="page" href="{% url 'appBook' %}">Home</a>
                         </li>
                             <li class="nav-item px-3">
-                            <a class="nav-link" href="#">Livros</a>
+                            <a class="nav-link" href="{% url 'cadastrar_livro' %}">Livros</a>
                         </li>
                             <li class="nav-item px-3">
                             <a class="nav-link" href="#">Novidades</a>
                         </li>
                             <li class="nav-item px-3">
-                            <a class="nav-link" href="#">Entrar</a>
+                            <a class="nav-link" href="{% url 'form_login' %}">Entrar</a>
                         </li>
                     </div>
-                
                 </ul>
                 </div>
             </div>
