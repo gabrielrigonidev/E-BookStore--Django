@@ -40,6 +40,12 @@ INSTALLED_APPS = [
     'appBook',
 ]
 
+from django.contrib.messages import constants as message_constants
+MESSAGE_TAGS = {
+    message_constants.SUCCESS: 'success',
+    message_constants.ERROR: 'danger',
+}
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

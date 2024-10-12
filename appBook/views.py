@@ -1,10 +1,9 @@
 from datetime import timedelta
 from django.contrib import messages
 from django.shortcuts import render, redirect
-from appBook.forms import FormCadastroLivro
-from appBook.forms import FormCadastroUser
-from appBook.forms import FormLogin
+from django.contrib.auth.hashers import make_password, check_password
 from appBook.models import Usuario
+from appBook.forms import FormLogin, FormCadastroUser, FormCadastroLivro
 
 def appBook(request):
     return render(request, 'index.html')
@@ -12,7 +11,13 @@ def appBook(request):
 def cadastrar_user(request):
     novo_user = FormCadastroUser(request.POST or None)
     if request.POST:
-        if novo_user.is_valid():
+        email = request.POST.get('email')
+        senha = request.POST.get('senha')
+
+        if Usuario.objects.filter(email=email).exists():
+            messages.error(request, "E-mail já esta sendo utilizado!")
+        elif novo_user.is_valid():
+            novo_user.instance.senha = make_password(senha)
             novo_user.save()
             messages.success(request, "Usuário cadastrado com sucesso!")
             return redirect('appBook')
@@ -23,7 +28,6 @@ def cadastrar_user(request):
 
 def exibir_users(request):
     usuarios = Usuario.objects.all().values()
-
     context = {
         'dados': usuarios
     }
@@ -44,21 +48,21 @@ def cadastrar_livro(request):
 def form_login(request):
     formLogin = FormLogin(request.POST or None)
 
-    if request.POST:
-        _email = request.POST['email']
-        _senha = request.POST['senha']
-        try:
-            usuario = Usuario.objects.get(email=_email, senha=_senha)
-            if usuario is not None:
-                request.session.set_expiry(timedelta(seconds=60))
-                request.session['email'] = _email
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        senha = request.POST.get('senha')
 
+        try:
+            usuario = Usuario.objects.get(email=email)
+            if check_password(senha, usuario.senha):
+                request.session.set_expiry(timedelta(seconds=60))
+                request.session['email'] = email
                 messages.success(request, "Logado com sucesso!")
                 return redirect('dashboard')
-        except:
-            messages.error(request, "Deu ruim parceiro")
-            return redirect('form_login')
-
+            else:
+                messages.error(request, "Senha incorreta.")
+        except usuario.DoesNotExist:
+            messages.error(request, "Usuário não encontrado.")
     context = {
         'form': formLogin
     }
@@ -68,8 +72,10 @@ def dashboard(request):
     #Recupera a variável de Sessão
     email = request.session.get('email')
 
+    if not request.session.get('email'):
+        messages.error(request, "Você precisa estar logado para acessar o dashboard!")
+        return redirect('appBook')
     context = {
             'username': email
         }
-
     return render(request, 'dashboard.html', context)
