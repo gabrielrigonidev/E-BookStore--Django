@@ -79,3 +79,20 @@ def dashboard(request):
             'username': email
         }
     return render(request, 'dashboard.html', context)
+
+def editar_usuario(request, id_usuario):
+    usuario = Usuario.objects.get(id=id_usuario)
+    form = FormCadastroUser(request.POST or None, instance=usuario)
+    if request.POST:
+        if form.is_valid():
+            form.save()
+            return redirect('exibir_users')
+    context = {
+        'form': form
+    }
+    return render(request, 'editar_usuario.html', context)
+
+def excluir_usuario(request, id_usuario):
+    usuario = Usuario.objects.get(id=id_usuario)
+    usuario.delete()
+    return redirect('exibir_users')
