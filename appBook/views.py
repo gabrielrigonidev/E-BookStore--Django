@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.contrib.auth.hashers import make_password, check_password
 from appBook.models import Usuario
-from appBook.forms import FormLogin, FormCadastroUser, FormCadastroLivro
+from appBook.forms import FormLogin, FormCadastroUser, FormCadastroLivro, FormEditarUsuario
 
 def appBook(request):
     return render(request, 'index.html')
@@ -72,21 +72,30 @@ def dashboard(request):
     #Recupera a variável de Sessão
     email = request.session.get('email')
 
-    if not request.session.get('email'):
+    if not email:
         messages.error(request, "Você precisa estar logado para acessar o dashboard!")
         return redirect('appBook')
+    try:
+        usuario_logado = Usuario.objects.get(email=email)
+    except Usuario.DoesNotExist:
+        messages.error(request, "Usuário não encontrado.")
+        return redirect('form_login')
+
     context = {
-            'username': email
-        }
+        'dados': [usuario_logado]
+    }
     return render(request, 'dashboard.html', context)
 
 def editar_usuario(request, id_usuario):
     usuario = Usuario.objects.get(id=id_usuario)
-    form = FormCadastroUser(request.POST or None, instance=usuario)
+    form = FormEditarUsuario(request.POST or None, instance=usuario)    
+    senha = request.POST.get('senha')
+
     if request.POST:
         if form.is_valid():
+            usuario.senha = make_password(senha)
             form.save()
-            return redirect('exibir_users')
+            return redirect('dashboard')
     context = {
         'form': form
     }

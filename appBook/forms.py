@@ -33,3 +33,17 @@ class FormLogin(forms.ModelForm):
             'email': forms.EmailInput(attrs={'class':'form-control m-2', 'placeholder':'usuario@email.com'}),
             'senha': forms.PasswordInput(attrs={'class':'form-control m-2'})
         }
+
+class FormEditarUsuario(forms.ModelForm):
+    class Meta:
+        model = Usuario
+        fields = ('email', 'senha')
+
+        widgets = {
+            'email': forms.EmailInput(attrs={'class': 'form-control m-2', 'placeholder': 'usuario@email.com'}),
+            'senha': forms.PasswordInput(attrs={'class': 'form-control m-2'})
+        }
+
+    def __init__(self, *args, **kwargs):
+        super(FormEditarUsuario, self).__init__(*args, **kwargs)
+        self.fields['email'].widget.attrs['readonly'] = True
