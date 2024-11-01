@@ -1,6 +1,5 @@
 from django import forms
-from appBook.models import Livro
-from appBook.models import Usuario
+from appBook.models import Livro, Usuario, Foto
 
 class FormCadastroUser(forms.ModelForm):
     class Meta:
@@ -47,3 +46,12 @@ class FormEditarUsuario(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(FormEditarUsuario, self).__init__(*args, **kwargs)
         self.fields['email'].widget.attrs['readonly'] = True
+
+class FormFoto(forms.ModelForm):
+    class Meta:
+        model = Foto
+        fields = ['nome','foto']
+
+        widgets = {
+            'foto': forms.FileInput(attrs={'accept':'image/*'})
+        }

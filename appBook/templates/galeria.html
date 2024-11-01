@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block titulo %} Cadastro - EBooksShop {% endblock %}
+{% block conteudo %}
+
+<section class="container col-6 mt-5">
+    <h1>Novo Usuário: </h1>
+    <br>
+    {% for g in galeria %}
+    <div class="">
+        <div class="card">
+            <img src="/media/{{ g.foto }}">
+        </div>
+    </div>
+    {% endfor %}
+</section>
+
+
+
+{% endblock %}

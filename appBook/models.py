@@ -12,3 +12,7 @@ class Livro(models.Model):
     genero = models.CharField(max_length=255)
     paginas = models.PositiveIntegerField()
     preco = models.DecimalField(max_digits=10, decimal_places=2)
+
+class Foto(models.Model):
+    nome = models.CharField(max_length=255)
+    foto = models.ImageField(upload_to='imagens/')

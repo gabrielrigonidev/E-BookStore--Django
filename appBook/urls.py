@@ -9,5 +9,7 @@ urlpatterns = [
     path('login/', views.form_login, name='form_login'),
     path('dashboard/', views.dashboard, name='dashboard'),
     path('editar_usuario/<int:id_usuario>', views.editar_usuario, name='editar_usuario'),
-    path('excluir_usuario/<int:id_usuario>', views.excluir_usuario, name='excluir_usuario')
+    path('excluir_usuario/<int:id_usuario>', views.excluir_usuario, name='excluir_usuario'),
+    path('add-foto/', views.add_foto, name='add_foto'),
+    path('galeria/', views.galeria, name='galeria')
 ]

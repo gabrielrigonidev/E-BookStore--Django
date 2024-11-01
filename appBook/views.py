@@ -2,8 +2,8 @@ from datetime import timedelta
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.contrib.auth.hashers import make_password, check_password
-from appBook.models import Usuario
-from appBook.forms import FormLogin, FormCadastroUser, FormCadastroLivro, FormEditarUsuario
+from appBook.models import Usuario, Foto
+from appBook.forms import FormLogin, FormCadastroUser, FormCadastroLivro, FormEditarUsuario, FormFoto
 
 def appBook(request):
     return render(request, 'index.html')
@@ -105,3 +105,21 @@ def excluir_usuario(request, id_usuario):
     usuario = Usuario.objects.get(id=id_usuario)
     usuario.delete()
     return redirect('exibir_users')
+
+def add_foto(request):
+    if request.POST:
+        form = FormFoto(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('galeria')
+    else:
+        form = FormFoto()
+    return render(request, 'add_foto.html', {'form': form})
+    
+def galeria(request):
+    fotos = Foto.objects.all().values()
+
+    context = {
+        'galeria': fotos
+    }
+    return render(request, 'galeria.html', context)
