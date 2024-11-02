@@ -12,7 +12,7 @@ p {
 
 .navbar-fix {
     justify-content: flex-end;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
 }
 
 .logo {
@@ -36,11 +36,11 @@ main {
 }
 
 .text-banner {
-    font-size: 6rem;
+    font-size: 5rem;
 }
 
 .text-p {
-    font-size: 30px;
+    font-size: 25px;
 }
 
 .book-banner {
@@ -66,7 +66,6 @@ main {
 }
 
 .footer-text {
-    font-size: 20px;
-    color: inherit;
+    font-size: 18px;
     text-decoration: none;
 }
