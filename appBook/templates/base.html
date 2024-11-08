@@ -29,7 +29,7 @@
                             <a class="nav-link" href="{% url 'cadastrar_livro' %}">Livros</a>
                         </li>
                             <li class="nav-item px-3">
-                            <a class="nav-link" href="#">Novidades</a>
+                            <a class="nav-link" href="{% url 'galeria' %}">Galera</a>
                         </li>
                             <li class="nav-item px-3">
                             <a class="nav-link" href="{% url 'form_login' %}">Entrar</a>
@@ -59,7 +59,7 @@
             <!-- Div com a logo -->
         </div>
         <div>
-            <h5 class="footer-text">Início</h5>
+            <h5>Início</h5>
             <a class="footer-text" href="{% url 'appBook' %}">Home</a>
             <br>
             <a class="footer-text" href="{% url 'galeria' %}">Galeria</a>
@@ -69,16 +69,17 @@
             <a class="footer-text">Baixar App</a>
         </div>
         <div>
-            <h5 class="footer-text">Sobre nós</h5>
+            <h5>Sobre nós</h5>
             <a class="footer-text" href="{% url 'cadastrar_user' %}">Usuários</a>
             <br>
             <a class="footer-text" href="{% url 'cadastrar_livro' %}">Add Usuário</a>
+            <br>
             <a class="footer-text">Add Livro</a>
             <br>
             <a class="footer-text">Add Foto</a>
         </div>
         <div>
-            <h5 class="footer-text">Suporte</h5>
+            <h5>Suporte</h5>
             <a class="footer-text" href="{% url 'cadastrar_user' %}">FAQ</a>
             <br>
             <a class="footer-text" href="{% url 'cadastrar_livro' %}">Telefones</a>

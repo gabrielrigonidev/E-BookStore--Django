@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block conteudo %}
+
+<div class="container mt-4">
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Capa:</th>
+                <th>Livro:</th>
+                <th>Autor:</th>
+                <th>Preço:</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for livro in dados %}
+                <tr>
+                    <td> <img src="/media/{{ livro.foto }}" alt="Foto Livro" class="foto-perfil"> </td>
+                    <td>{{ livro.titulo }}</td>
+                    <td>{{ livro.autor }}
+                    <td>{{ livro.preco }}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

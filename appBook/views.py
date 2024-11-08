@@ -2,14 +2,14 @@ from datetime import timedelta
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.contrib.auth.hashers import make_password, check_password
-from appBook.models import Usuario, Foto
+from appBook.models import Usuario, Livro, Foto
 from appBook.forms import FormLogin, FormCadastroUser, FormCadastroLivro, FormEditarUsuario, FormFoto
 
 def appBook(request):
     return render(request, 'index.html')
 
 def cadastrar_user(request):
-    novo_user = FormCadastroUser(request.POST or None)
+    novo_user = FormCadastroUser(request.POST or None, request.FILES or None)
     if request.POST:
         email = request.POST.get('email')
         senha = request.POST.get('senha')
@@ -33,8 +33,15 @@ def exibir_users(request):
     }
     return render(request, 'usuarios.html', context)
 
+def exibir_livros(request):
+    livros = Livro.objects.all().values()
+    context = {
+        'dados': livros
+    }
+    return render(request, 'livros.html', context)
+
 def cadastrar_livro(request):
-    novo_livro = FormCadastroLivro(request.POST or None)
+    novo_livro = FormCadastroLivro(request.POST or None, request.FILES or None)
     if request.POST:
         if novo_livro.is_valid():
             novo_livro.save()

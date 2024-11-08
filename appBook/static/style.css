@@ -66,6 +66,14 @@ main {
 }
 
 .footer-text {
-    font-size: 18px;
+    font-size: 15px;
     text-decoration: none;
+    color: #b7b7b7;
+}
+
+.foto-perfil {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 80%;
 }
