@@ -124,6 +124,12 @@ def add_foto(request):
     return render(request, 'add_foto.html', {'form': form})
     
 def galeria(request):
+    email = request.session.get('email')
+
+    if not email:
+        messages.error(request, "Você precisa estar logado para acessar a galeria!")
+        return redirect('form_login')
+    
     fotos = Foto.objects.all().values()
 
     context = {
