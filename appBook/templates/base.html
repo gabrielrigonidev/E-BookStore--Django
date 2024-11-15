@@ -11,7 +11,6 @@
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
-    
     <header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
@@ -25,11 +24,15 @@
                         <li class="nav-item px-3">
                             <a class="nav-link active" aria-current="page" href="{% url 'appBook' %}">Home</a>
                         </li>
-                            <li class="nav-item px-3">
-                            <a class="nav-link" href="{% url 'cadastrar_livro' %}">Livros</a>
+                        <li class="nav-item px-3">
+                            <a class="nav-link" href="{% url 'exibir_livros' %}">Livros</a>
                         </li>
-                            <li class="nav-item px-3">
-                            <a class="nav-link" href="{% url 'galeria' %}">Galera</a>
+                        <li class="nav-item px-3">
+                            <a class="nav-link" href="{% url 'galeria' %}">Galeria</a>
+                        </li>
+                        <li class="nav-item px-3">
+                            <a class="nav-link" href="{% url 'contato' %}">Contato</a>
+                        </li>
                         </li>
                             <li class="nav-item px-3">
                             <a class="nav-link" href="{% url 'form_login' %}">Entrar</a>
@@ -71,13 +74,13 @@
         </div>
         <div>
             <h5>Sobre nós</h5>
-            <a class="footer-text" href="{% url 'cadastrar_user' %}">Usuários</a>
+            <a class="footer-text" href="{% url 'exibir_users' %}">Usuários</a>
             <br>
-            <a class="footer-text" href="{% url 'cadastrar_livro' %}">Add Usuário</a>
+            <a class="footer-text" href="{% url 'cadastrar_user' %}">Add Usuário</a>
             <br>
-            <a class="footer-text">Add Livro</a>
+            <a class="footer-text" href="{% url 'cadastrar_livro' %}">Add Livro</a>
             <br>
-            <a class="footer-text">Add Foto</a>
+            <a class="footer-text" href="{% url 'add_foto' %}">Add Foto</a>
         </div>
         <div>
             <h5>Suporte</h5>

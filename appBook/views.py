@@ -27,6 +27,12 @@ def cadastrar_user(request):
     return render(request, 'cadastro.html', context)
 
 def exibir_users(request):
+    email = request.session.get('email')
+
+    if not email:
+        messages.error(request, "Você precisa estar logado para acessar a lista de usuários!")
+        return redirect('form_login')
+
     usuarios = Usuario.objects.all().values()
     context = {
         'dados': usuarios
@@ -136,3 +142,6 @@ def galeria(request):
         'galeria': fotos
     }
     return render(request, 'galeria.html', context)
+
+def contato(request):
+    return render(request, 'contato.html')

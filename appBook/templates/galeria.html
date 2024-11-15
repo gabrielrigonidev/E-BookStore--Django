@@ -1,17 +1,13 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block titulo %} Cadastro - EBooksShop {% endblock %}
+{% block titulo %} Galeria - EBooksShop {% endblock %}
 {% block conteudo %}
 
 <section class="container col-6 mt-5">
-    <h1>Novo Usuário: </h1>
+    <h1>Lista de Imagens do sistema:</h1>
     <br>
     {% for g in galeria %}
-    <div class="">
-        <div class="card">
-            <img src="/media/{{ g.foto }}">
-        </div>
-    </div>
+        <img src="/media/{{ g.foto }}" alt="Foto Usuário" class="foto-perfil"> </td>
     {% endfor %}
 </section>
 
