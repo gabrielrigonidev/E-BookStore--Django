@@ -139,7 +139,7 @@ def galeria(request):
     fotos = Foto.objects.all().values()
 
     context = {
-        'galeria': fotos
+        'galeria': fotos,
     }
     return render(request, 'galeria.html', context)
 
